@@ -32,3 +32,15 @@ def csv(file, list_of_locations):
             csv_file.seek(0)
     r = json.dumps(dic)
     return r
+import xlrd
+def excel(file, list_of_locations):
+    workbook = xlrd.open_workbook(file)
+    worksheet = workbook.sheet_by_index(0)
+    dic = {}
+    for i in list_of_locations:
+        y = ord(i[0]) - 97
+        x = int(i[1])
+        value = worksheet.cell(x-1, y)
+        dic[i] = value
+    r = json.dumps(dic)
+    return r
